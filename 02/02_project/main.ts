@@ -16,7 +16,7 @@ app.post("/checkout", async function (req: Request, res: Response) {
     if (req.body.items) {
       for (const item of req.body.items) {
         const [productData] = await connection.query(
-          "select * from cccat.product where product_id = $1",
+          "select * from cccat.product where id_product = $1",
           [item.idProduct]
         );
         const price = parseFloat(productData.price);

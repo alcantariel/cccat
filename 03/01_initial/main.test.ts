@@ -37,3 +37,18 @@ test("Deve criar um pedido com 3 itens com cupom de desconto", async function ()
   const output = response.data;
   expect(output.total).toBe(4872);
 });
+
+test("Deve criar um pedido com 3 itens com cupom de desconto inválido/expirado", async function () {
+  const input = {
+    cpf: "927.099.350-74",
+    items: [
+      { idProduct: 1, quantity: 1 },
+      { idProduct: 2, quantity: 1 },
+      { idProduct: 3, quantity: 3 },
+    ],
+    coupon: "VALE10",
+  };
+  const response = await axios.post("http://localhost:3000/checkout", input);
+  const output = response.data;
+  expect(output.total).toBe(6090);
+});
